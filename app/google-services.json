@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "198800143128",
+    "project_id": "avan-4ef56",
+    "storage_bucket": "avan-4ef56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198800143128:android:4596b6ba8fdb161577246d",
+        "android_client_info": {
+          "package_name": "com.khalej.storejoud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198800143128-s3ochc4tn26n79nb8f1dnlsesdceqpvm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBngQDoOTsj7l7wWT0oMwrBFA0aWdVNEAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198800143128-s3ochc4tn26n79nb8f1dnlsesdceqpvm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.khalej.storejoud">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".application"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.ChangeLang"></activity>
+        <activity android:name=".Activity.BirthDateUpdate" />
+        <activity android:name=".Activity.PasswordUpdate" />
+        <activity android:name=".Activity.EmailUpdate" />
+        <activity android:name=".Activity.PhoneUpdate" />
+        <activity android:name=".Activity.NameUpdate" />
+        <activity android:name=".Activity.GenderUpdate" />
+        <activity android:name=".Activity.addresses" />
+        <activity android:name=".Activity.addAddress" />
+        <activity android:name=".Activity.write_review" />
+        <activity android:name=".Activity.reviews" />
+        <activity android:name=".Activity.account" />
+        <activity android:name=".Activity.activity_notification" />
+        <activity android:name=".Activity.feed_notification" />
+        <activity android:name=".Activity.offer_notification" />
+        <activity android:name=".Activity.notifications" />
+        <activity android:name=".Activity.SelectLang" />
+        <activity android:name=".Activity.IntroThree" />
+        <activity android:name=".Activity.IntroTwo" />
+        <activity android:name=".Activity.IntroOne" />
+        <activity android:name=".Activity.Login" />
+        <activity android:name=".Activity.ForgetPassword" />
+        <activity android:name=".Activity.Regester" />
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.MainActivity" />
+    </application>
+
+</manifest>

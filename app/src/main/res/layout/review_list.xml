@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    card_view:cardPreventCornerOverlap="false"
+    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    card_view:cardBackgroundColor="#ffffff"
+    card_view:cardCornerRadius="10dp"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:id="@+id/relativelayout2"
+        >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:weightSum="10"
+          android:id="@+id/s"
+          >
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_weight="2"
+              android:layout_height="wrap_content">
+              <de.hdodenhof.circleimageview.CircleImageView
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:id="@+id/photo"
+                  android:layout_width="match_parent"
+                  android:layout_height="70dp"
+                  android:src="@drawable/logocolor"
+                  app:civ_border_width="2dp"
+                  app:civ_border_color="@color/orange"/>
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="8"
+              android:orientation="vertical"
+              android:layout_marginStart="5dp"
+              android:layout_gravity="center"
+              >
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/blue"
+                  android:id="@+id/name"
+                  android:textSize="18dp"
+                  android:textStyle="bold"
+                  android:text="Store Jode"
+                  android:fontFamily="@font/taj"
+                  />
+              <RatingBar
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="2dp"
+                  android:numStars="5"
+                  style = "?android:attr/ratingBarStyleSmall"
+                  android:id="@+id/rate"
+                  android:theme="@style/RatingBar"
+                  android:rating="2.5"
+                  />
+
+          </LinearLayout>
+      </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@+id/s">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/header_gray"
+                android:id="@+id/desc"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="Store Jode"
+                android:fontFamily="@font/taj"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/header_gray"
+                android:id="@+id/date"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:text="Store Jode"
+                android:fontFamily="@font/taj"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
