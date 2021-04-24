@@ -13,6 +13,9 @@
     <string name="warehouse_order">Warehouse order</string>
     <string name="markets">Markets</string>
     <string name="track_ship">Track Shipment</string>
+    <string name="status">Order status</string>
+    <string name="items">Items</string>
+    <string name="dateShipping">Date Shipping</string>
     <string name="enter_number_track">enter track num</string>
     <string name="order_charge">Charge Order</string>
     <string name="passwordValied">Password Must Be More 5 digit</string>

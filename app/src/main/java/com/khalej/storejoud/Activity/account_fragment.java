@@ -21,7 +21,7 @@ public class account_fragment extends Fragment {
     private apiinterface_home apiinterface;
     private RecyclerView recyclerView, recyclerView2, recyclerView3;
     private RecyclerView.LayoutManager layoutManager;
-    LinearLayout profile,address,lang;
+    LinearLayout profile,address,lang,order;
 
     private SharedPreferences sharedpref;
     private SharedPreferences.Editor edt;
@@ -56,6 +56,13 @@ public class account_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),ChangeLang.class));
+            }
+        });
+        order=view.findViewById(R.id.order);
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),Order.class));
             }
         });
 

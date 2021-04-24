@@ -13,6 +13,9 @@
     <string name="admin_order">طلبات الأدمن</string>
     <string name="warehouse_order">طلبات المستودع</string>
     <string name="markets">المتاجر</string>
+    <string name="status">حالة الطلب</string>
+    <string name="items">عدد الطلبات</string>
+    <string name="dateShipping">تاريخ الشحن</string>
     <string name="orderMandop">أطلب مندوب</string>
     <string name="passwordValied">كلمة المرور يجب ان تكون اكثر من 5 أحرف او ارقام</string>
     <string name="company">الشركات</string>
