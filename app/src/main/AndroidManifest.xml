@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.OrderDetails"></activity>
+        <activity android:name=".Activity.CategoryDetails"></activity>
+        <activity android:name=".Activity.OrderDetails" />
         <activity android:name=".Activity.Order" />
         <activity android:name=".Activity.ChangeLang" />
         <activity android:name=".Activity.BirthDateUpdate" />

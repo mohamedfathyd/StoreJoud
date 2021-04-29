@@ -22,13 +22,50 @@
                        android:layout_height="match_parent">
                        <LinearLayout
                            android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="horizontal"
+                           android:weightSum="10"
+                           android:id="@+id/header"
+                           android:layout_margin="10dp"
+                           >
+
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:gravity="start"
+                               android:layout_weight="6"
+                               android:layout_marginStart="20dp"
+                               android:text="@string/product"
+                               android:fontFamily="@font/taj"
+                               android:layout_marginTop="5dp"
+                               android:layout_gravity="center"
+                               android:textColor="@color/blue"
+                               android:textStyle="bold"
+                               android:textSize="19dp"
+                               android:id="@+id/name"
+                               />
+
+                       </LinearLayout>
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_below="@+id/header"
+                           android:id="@+id/s"
+                           android:layout_marginTop="5dp"
+                           android:layout_marginLeft="20dp"
+                           android:layout_marginRight="20dp"
+                           android:background="@color/header_gray"
+                           android:layout_height="0.5dp"></View>
+                       <LinearLayout
+                           android:layout_width="match_parent"
                            android:orientation="vertical"
+                           android:layout_marginTop="10dp"
+                           android:layout_below="@+id/s"
                            android:layout_height="wrap_content">
                            <androidx.recyclerview.widget.RecyclerView
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:layout_below="@id/name"
-                               android:id="@+id/recyclerviewfavourit"
+                               android:id="@+id/recyclerviewProduct"
                                android:orientation="vertical"
                                android:layout_gravity="center"
                                app:reverseLayout="true"
@@ -41,8 +78,72 @@
                            </androidx.recyclerview.widget.RecyclerView>
 
                        </LinearLayout>
+
+
                    </RelativeLayout>
+
                </ScrollView>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_marginRight="13dp"
+                   android:layout_marginLeft="13dp"
+                   android:layout_centerInParent="true"
+                   android:visibility="gone"
+                   android:id="@+id/error"
+                   android:layout_marginTop="5dp"
+
+                   >
+                   <ImageView
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/notfound"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:textStyle="bold"
+                       android:textColor="@color/blue"
+                       android:fontFamily="@font/taj"
+                       android:textSize="25dp"
+                       android:text="@string/notfound"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:textStyle="bold"
+                       android:textColor="@color/header_gray"
+                       android:fontFamily="@font/taj"
+                       android:textSize="17dp"
+                       android:text="@string/notfoundMssage"
+                       />
+                   <androidx.appcompat.widget.AppCompatButton
+                       android:id="@+id/appCompatButtonRegisterservcies"
+                       android:layout_width="match_parent"
+                       android:layout_gravity="center"
+                       android:layout_height="50dp"
+                       android:layout_centerHorizontal="true"
+                       android:layout_margin="20dp"
+                       android:textSize="20dp"
+                       android:textAllCaps="false"
+                       android:textColor="@color/white"
+                       android:background="@drawable/backshapered"
+                       android:text="@string/backhome" />
+               </LinearLayout>
            </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progressBar_subject"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:indeterminateDrawable="@drawable/progress"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:visibility="gone" />
     </RelativeLayout>
 </FrameLayout>

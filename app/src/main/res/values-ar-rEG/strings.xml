@@ -20,6 +20,9 @@
     <string name="passwordValied">كلمة المرور يجب ان تكون اكثر من 5 أحرف او ارقام</string>
     <string name="company">الشركات</string>
     <string name="myCard">البطاقة الخاصة بي</string>
+    <string name="color">الألوان</string>
+    <string name="classifications">المواصفات</string>
+    <string name="alsoLike">منتاجات اخري ذات صلة</string>
     <string name="contact">التواصل :</string>
     <string name="numorders">عدد الطلبات</string>
     <string name="accuntBalance">رصيد الحساب</string>

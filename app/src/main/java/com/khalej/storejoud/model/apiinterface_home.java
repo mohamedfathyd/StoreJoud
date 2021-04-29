@@ -51,6 +51,21 @@ public interface apiinterface_home {
     @GET("api/banners")
     Call<contact_general> getcontacts_generalData();
 
+    @GET("api/categories")
+    Call<contact_category> getcontacts_category(@Query("lang") String lang);
+
+    @GET("api/products")
+    Call<contact_products> getcontacts_products(@Query("lang") String lang);
+
+    @GET("api/products/{product}")
+    Call<contact_single_product> getcontacts_productDetailsById(@Path("product") String product);
+
+    @GET("api/categories/{id}/products")
+    Call<contact_products> getcontacts_productsById(@Path("id") String id);
+
+    @GET("api/search")
+    Call<contact_products> getcontacts_search(@Query("search_with_key") String search_with_key);
+
     @GET("api/cities")
     Call<contact_cities> getcontacts_cities();
 
@@ -78,7 +93,16 @@ public interface apiinterface_home {
     Call<contact_general_user> getcontacts_newaccount(@Field("full_name") String name, @Field("password") String password, @Field("email") String address,
                                                       @Field("phone") String phone);
 
+    @FormUrlEncoded
+    @PATCH("api/profile/update")
+    Call <contact_general_user_update> updateProfile(@HeaderMap Map<String, String> headers, @Field("full_name") String full_name,
+                                                     @Field("email") String email, @Field("phone") String phone);
 
+    @FormUrlEncoded
+    @PATCH("api/profile/update/password")
+    Call <contact_general_user_update> updateProfile_pass(@HeaderMap Map<String, String> headers,
+                                                          @Field("password") String password,
+                                                          @Field("password_confirmation") String password_confirmation);
 
 
     @FormUrlEncoded

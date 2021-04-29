@@ -14,6 +14,9 @@
     <string name="status">Order status</string>
     <string name="items">Items</string>
     <string name="dateShipping">Date Shipping</string>
+    <string name="color">Colors</string>
+    <string name="alsoLike">You Might Also Like</string>
+    <string name="classifications">classifications</string>
     <string name="markets">Markets</string>
     <string name="track_ship">Track Shipment</string>
     <string name="enter_number_track">enter track num</string>

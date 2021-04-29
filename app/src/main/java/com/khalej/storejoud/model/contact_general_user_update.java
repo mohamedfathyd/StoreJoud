@@ -2,9 +2,9 @@ package com.khalej.storejoud.model;
 import com.google.gson.annotations.SerializedName;
 
 
-public class contact_general_user {
+public class contact_general_user_update {
     @SerializedName("payload")
-    contact_user payload;
+    contact_user_info payload;
     @SerializedName("status")
     boolean status;
     @SerializedName("messages")
@@ -12,11 +12,11 @@ public class contact_general_user {
     @SerializedName("code")
     int code;
 
-    public contact_user getPayload() {
+    public contact_user_info getPayload() {
         return payload;
     }
 
-    public void setPayload(contact_user payload) {
+    public void setPayload(contact_user_info payload) {
         this.payload = payload;
     }
 
@@ -44,12 +44,22 @@ public class contact_general_user {
         this.code = code;
     }
     public class contact_user {
+        @SerializedName("id")
+        String id;
         @SerializedName("token")
         String token;
         @SerializedName("user_info")
         contact_user_info  user_info;
 
-       public String getToken() {
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getToken() {
             return token;
         }
 
@@ -72,12 +82,16 @@ public class contact_general_user {
         String email;
      @SerializedName("phone")
         String phone;
-        @SerializedName("type")
+     @SerializedName("phone_code")
+        String phone_code;
+     @SerializedName("type")
         String type;
      @SerializedName("id")
         String id;
+     @SerializedName("allUserMedia")
+        contact_userMedia userMedia;
      @SerializedName("logo_url")
-     String logo_url;
+        String logo_url;
 
         public String getLogo_url() {
             return logo_url;
@@ -87,12 +101,12 @@ public class contact_general_user {
             this.logo_url = logo_url;
         }
 
-        public String getType() {
-            return type;
+        public contact_userMedia getUserMedia() {
+            return userMedia;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setUserMedia(contact_userMedia userMedia) {
+            this.userMedia = userMedia;
         }
 
         public String getFull_name() {
@@ -119,7 +133,21 @@ public class contact_general_user {
             this.phone = phone;
         }
 
+        public String getPhone_code() {
+            return phone_code;
+        }
 
+        public void setPhone_code(String phone_code) {
+            this.phone_code = phone_code;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
 
         public String getId() {
             return id;
@@ -129,7 +157,18 @@ public class contact_general_user {
             this.id = id;
         }
 
+        public class contact_userMedia{
+            @SerializedName("logo")
+            String logo;
 
+            public String getLogo() {
+                return logo;
+            }
+
+            public void setLogo(String logo) {
+                this.logo = logo;
+            }
+        }
     }
 
 }

@@ -18,6 +18,9 @@
     <string name="dateShipping">Date Shipping</string>
     <string name="enter_number_track">enter track num</string>
     <string name="order_charge">Charge Order</string>
+    <string name="color">Colors</string>
+    <string name="alsoLike">You Might Also Like</string>
+    <string name="classifications">classifications</string>
     <string name="passwordValied">Password Must Be More 5 digit</string>
     <string name="company">Companys</string>
     <string name="myCard">My Card</string>

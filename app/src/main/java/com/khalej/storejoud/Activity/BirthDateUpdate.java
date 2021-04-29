@@ -5,13 +5,16 @@ import androidx.appcompat.widget.AppCompatButton;
 import me.anwarshahriar.calligrapher.Calligrapher;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.khalej.storejoud.R;
@@ -41,15 +44,27 @@ public class BirthDateUpdate extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                startActivity(new Intent(BirthDateUpdate.this,account.class));
                 finish();
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                edt.putString("birthDate",datee);
+                edt.apply();
+                Dialog dialog1;
+                dialog1 = new Dialog(BirthDateUpdate.this);
+                dialog1.setContentView(R.layout.dialog_success);
+                dialog1.getWindow().setLayout( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                dialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                TextView message=dialog1.findViewById(R.id.message);
+                message.setText("تم تعديل تاريخ الميلاد  بنجاح");
+                dialog1.show();
             }
         });
+//        picker.getDatePicker().setMinDate(System.currentTimeMillis() - 10000);
         Bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

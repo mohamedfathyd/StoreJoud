@@ -21,7 +21,7 @@ public class account_fragment extends Fragment {
     private apiinterface_home apiinterface;
     private RecyclerView recyclerView, recyclerView2, recyclerView3;
     private RecyclerView.LayoutManager layoutManager;
-    LinearLayout profile,address,lang,order;
+    LinearLayout profile,address,lang,order,logOut;
 
     private SharedPreferences sharedpref;
     private SharedPreferences.Editor edt;
@@ -38,6 +38,26 @@ public class account_fragment extends Fragment {
         sharedpref = getActivity().getSharedPreferences("Education", Context.MODE_PRIVATE);
         edt = sharedpref.edit();
         profile=view.findViewById(R.id.profile);
+        logOut=view.findViewById(R.id.logOut);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt.putInt("id",0);
+                edt.putString("name","");
+                edt.putString("image","");
+                edt.putString("phone","");
+                edt.putString("address","");
+                edt.putString("password","");
+                edt.putString("createdAt","");
+                edt.putInt("type",0);
+                edt.putFloat("wallet",0);
+                edt.putString("token","");
+                edt.putString("remember","no");
+                edt.apply();
+                startActivity(new Intent(getContext(), Login.class));
+                getActivity().finish();
+            }
+        });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
