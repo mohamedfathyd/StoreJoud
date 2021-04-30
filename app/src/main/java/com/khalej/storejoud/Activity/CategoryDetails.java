@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,9 +20,11 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.khalej.storejoud.Adapter.RecyclerAdapter_class;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_colors;
@@ -33,6 +38,7 @@ import com.khalej.storejoud.model.contact_products;
 import com.khalej.storejoud.model.contact_single_product;
 import com.khalej.storejoud.model.contact_single_product;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class CategoryDetails extends AppCompatActivity {
@@ -58,6 +64,8 @@ public class CategoryDetails extends AppCompatActivity {
     TextView productName,price,desc,alsoLike;
     Intent intent;
     RatingBar ratingBar;
+    ProgressDialog progressDialog;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +111,7 @@ public class CategoryDetails extends AppCompatActivity {
         appCompatButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                fetchAddToCard();
             }
         });
     }
@@ -151,6 +159,7 @@ public class CategoryDetails extends AppCompatActivity {
                     }
                     else{alsoLike.setVisibility(View.GONE);
                     recyclerViewProduct.setVisibility(View.GONE);}
+                    id=product.getId();
                     //ratingBar.setRating(Float.parseFloat(product.getAverage_rate()));
                 } catch (Exception e) {
                     progressBar.setVisibility(View.GONE);
@@ -158,6 +167,55 @@ public class CategoryDetails extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<contact_single_product> call, Throwable t) {progressBar.setVisibility(View.GONE);}
+        });
+    }
+    public void fetchAddToCard(){
+        progressDialog = ProgressDialog.show(CategoryDetails.this,"جاري أضافة الطلب الى السلة","Please wait...",false,false);
+        progressDialog.show();
+        apiinterface= Apiclient_home.getapiClient().create(apiinterface_home.class);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Accept","application/json");
+        headers.put("Authorization","Bearer "+ sharedpref.getString("token",""));
+
+        Call<ResponseBody> call= apiinterface.getcontacts_addtoCart(headers,id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+
+                if(response.isSuccessful()){
+
+
+                    try {
+                        progressDialog.dismiss();
+
+
+                        Dialog dialog1;
+                        dialog1 = new Dialog(CategoryDetails.this);
+                        dialog1.setContentView(R.layout.dialog_success);
+                        dialog1.getWindow().setLayout( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        dialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                        TextView message=dialog1.findViewById(R.id.message);
+                        message.setText("تم أضافة الطلب الى السلة بنجاح");
+                        dialog1.show();
+                    }
+                    catch (Exception e){
+
+                        progressDialog.dismiss();
+                        Toast.makeText(CategoryDetails.this,"هناك خطأ في أضافة هذا المنتج الى سلة المشتريات",Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    Toast.makeText(CategoryDetails.this,"هناك خطأ في أضافة هذا المنتج الى سلة المشتريات",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                progressDialog.dismiss();
+            }
         });
     }
 }

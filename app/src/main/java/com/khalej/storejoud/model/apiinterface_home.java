@@ -60,6 +60,10 @@ public interface apiinterface_home {
     @GET("api/products/{product}")
     Call<contact_single_product> getcontacts_productDetailsById(@Path("product") String product);
 
+    @POST("api/products/{product}/cart")
+    Call<ResponseBody> getcontacts_addtoCart(@HeaderMap Map<String, String> headers,@Path("product") String product);
+
+
     @GET("api/categories/{id}/products")
     Call<contact_products> getcontacts_productsById(@Path("id") String id);
 
@@ -69,12 +73,18 @@ public interface apiinterface_home {
     @GET("api/cities")
     Call<contact_cities> getcontacts_cities();
 
-
+    @GET("api/customer/cart")
+    Call<contact_cart> getcontacts_cart(@HeaderMap Map<String, String> headers,@Query("lang") String lang);
 
     @FormUrlEncoded
     @POST("api/feedback")
     Call<ResponseBody> getcontacts_AddRate(@Field("rate") String rate,
                                            @Field("comment") String des);
+
+    @FormUrlEncoded
+    @POST("api/promo-codes/check")
+    Call<contact_copon> getcontacts_copon(@HeaderMap Map<String, String> headers,
+                                           @Field("promo_code") String promo_code);
 
 
 
