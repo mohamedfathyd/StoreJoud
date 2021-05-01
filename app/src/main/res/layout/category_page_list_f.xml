@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:cardPreventCornerOverlap="false"
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"
+
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="180dp"
+            android:padding="8dp"
+            android:background="@drawable/backshapeemptyblue"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <com.khalej.storejoud.RoundRectCornerImageView
+            android:layout_width="130dp"
+            android:layout_gravity="center"
+            android:id="@+id/photo"
+            android:scaleType="fitXY"
+            android:src="@drawable/logocolor"
+            android:layout_height="130dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="horizontal"
+                >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/taj"
+                android:id="@+id/name"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:text="FS - Nike Air Max 270 React..."
+                />
+                <ImageView
+                    android:id="@+id/favourit_icon"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_love_color" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/taj"
+                android:id="@+id/price"
+                android:layout_marginTop="3dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/orange"
+                android:text="$299,43"
+                />
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style = "?android:attr/ratingBarStyleSmall"
+                android:theme="@style/RatingBar"
+                android:id="@+id/rate"
+                android:visibility="gone"
+                android:rating="3.5"
+                />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_gravity="center"
+               android:id="@+id/offerL"
+               android:layout_marginTop="3dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/taj"
+                   android:background="@drawable/strick_shape"
+                   android:id="@+id/old_price"
+                   android:layout_gravity="center_vertical"
+                   android:gravity="center"
+                   android:textSize="14dp"
+                   android:textStyle="bold"
+                   android:textColor="@color/header_gray"
+                   android:text="$299,43"
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/taj"
+                   android:id="@+id/offer"
+                   android:layout_gravity="center_vertical"
+                   android:gravity="center"
+                   android:textSize="14dp"
+                   android:layout_marginStart="5dp"
+                   android:textStyle="bold"
+                   android:textColor="@color/red"
+                   android:text="24% Off"
+                   />
+           </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -88,19 +88,37 @@
                     android:layout_centerHorizontal="true"
                     android:padding="1dp">
                  </androidx.recyclerview.widget.RecyclerView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/productName"
-                    android:textColor="@color/blue"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/taj"
-                    android:text="@string/app_name"
-                    android:textSize="17dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    />
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:weightSum="10"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="10dp"
+                     >
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_weight="9"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/productName"
+                         android:textColor="@color/blue"
+                         android:textStyle="bold"
+                         android:fontFamily="@font/taj"
+                         android:text="@string/app_name"
+                         android:textSize="17dp"
+
+                         />
+                     <ImageView
+                         android:id="@+id/favourit_icon"
+                         android:layout_width="0dp"
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:layout_marginRight="10dp"
+                         android:background="@drawable/ic_love" />
+                 </LinearLayout>
+
 
                     <RatingBar
                         android:layout_width="wrap_content"
@@ -197,6 +215,19 @@
                         android:fontFamily="@font/taj"
                         android:id="@+id/desc"
                         android:textSize="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/browser_actions_title_color"
+                        android:textStyle="bold"
+                        android:id="@+id/viewR"
+                        android:fontFamily="@font/taj"
+                        android:text="@string/view_reviews"
+                        android:textSize="17dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"

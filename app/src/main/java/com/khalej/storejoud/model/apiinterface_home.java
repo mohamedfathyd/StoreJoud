@@ -57,15 +57,53 @@ public interface apiinterface_home {
     @GET("api/products")
     Call<contact_products> getcontacts_products(@Query("lang") String lang);
 
+    @GET("api/products/offers")
+    Call<contact_products> getcontacts_products_offer(@Query("lang") String lang);
+
+    @GET("api/products/top-selling")
+    Call<contact_products> getcontacts_products_top(@Query("lang") String lang);
+
+    @GET("api/products/top-rated")
+    Call<contact_products> getcontacts_products_rated(@Query("lang") String lang);
+
+    @GET("api/products/favorites")
+    Call<contact_products> getcontacts_products_favorites(@HeaderMap Map<String, String> headers,@Query("lang") String lang);
+
     @GET("api/products/{product}")
     Call<contact_single_product> getcontacts_productDetailsById(@Path("product") String product);
+
+    @DELETE("api/products/{id}/mark-as-un-favorite")
+    Call<ResponseBody> delete_favourit(@HeaderMap Map<String, String> headers, @Path("id") String id);
 
     @POST("api/products/{product}/cart")
     Call<ResponseBody> getcontacts_addtoCart(@HeaderMap Map<String, String> headers,@Path("product") String product);
 
+    @POST("api/products/{product}/mark-as-favorite")
+    Call<ResponseBody> getcontacts_markasFavourit(@HeaderMap Map<String, String> headers,@Path("product") String product);
+
+    @FormUrlEncoded
+    @POST("api/products/{product}/submit-review")
+    Call<ResponseBody> getcontacts_addreview(@HeaderMap Map<String, String> headers,@Path("product") String product,
+                                             @Field("review") String review,@Field("rate") int rate);
+
+
+    @FormUrlEncoded
+    @POST("api/user/addresses")
+    Call<ResponseBody> getcontacts_addaddress(@HeaderMap Map<String, String> headers,
+                                             @Field("name") String name,@Field("phone") String phone,
+                                              @Field("street_name") String street_name,@Field("city") String city,
+                                              @Field("postal_code") String postal_code);
+
 
     @GET("api/categories/{id}/products")
     Call<contact_products> getcontacts_productsById(@Path("id") String id);
+
+    @GET("api/products/{id}/reviews")
+    Call<contact_reviews> getcontacts_reviews(@HeaderMap Map<String, String> headers,@Path("id") String id);
+
+    @GET("api/user/addresses")
+    Call<contact_address> getcontacts_address(@HeaderMap Map<String, String> headers);
+
 
     @GET("api/search")
     Call<contact_products> getcontacts_search(@Query("search_with_key") String search_with_key);
@@ -73,7 +111,7 @@ public interface apiinterface_home {
     @GET("api/cities")
     Call<contact_cities> getcontacts_cities();
 
-    @GET("api/customer/cart")
+    @GET("api/cart")
     Call<contact_cart> getcontacts_cart(@HeaderMap Map<String, String> headers,@Query("lang") String lang);
 
     @FormUrlEncoded

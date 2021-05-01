@@ -32,17 +32,11 @@
                 android:orientation="horizontal"
                 android:layout_alignParentEnd="true"
                 >
-                <ImageView
-                    android:id="@+id/favourite_icon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/ic_love" />
+
                 <ImageView
                     android:id="@+id/delete_icon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="28dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/ic_trash" />
@@ -78,7 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:fontFamily="@font/taj"
             android:textColor="@color/blue"
@@ -96,7 +90,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.5"
+                android:layout_weight="5"
                 android:text="500 د.أ"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/orange"
@@ -109,7 +103,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:id="@+id/add_plus"
@@ -131,12 +125,12 @@
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:id="@+id/count"
-                    android:background="#9098B1"
+                    android:background="#EBF0FF"
                     android:text="1"
                     android:gravity="center_horizontal"
                     android:textSize="13dp"
                     android:layout_weight="4"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="#1D509E"
                     />
                 <ImageView
                     android:layout_width="0dp"

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_annonce;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_annonce_banner;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_products;
+import com.khalej.storejoud.Adapter.RecyclerAdapter_first_products_inside;
 import com.khalej.storejoud.R;
 import com.khalej.storejoud.model.Apiclient_home;
 import com.khalej.storejoud.model.apiinterface_home;
@@ -28,6 +29,7 @@ import com.khalej.storejoud.model.contact_category;
 import com.khalej.storejoud.model.contact_general;
 import com.khalej.storejoud.model.contact_products;
 
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,19 +37,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class main_fragment extends Fragment {
     private apiinterface_home apiinterface;
-    private RecyclerView recyclerviewFlash, recyclerviewbanner, recyclerviewCategory,recyclerviewFashion;
+    private RecyclerView recyclerviewFlash, recyclerviewbanner, recyclerviewCategory,recyclerviewFashion,recyclerviewFavourit;
     private RecyclerView.LayoutManager layoutManager;
     private List<contact_general.media> contactList_annonce ;
     private com.khalej.storejoud.model.contact_general contact_general;
     private RecyclerAdapter_first_annonce_banner recyclerAdapter_annonce;
     private RecyclerAdapter_first_annonce recyclerAdapter_first_annonce;
     private RecyclerAdapter_first_products recyclerAdapter_first_products;
+    private RecyclerAdapter_first_products_inside recyclerAdapter_first_products_inside;
     contact_products contact_products;
     List<contact_products.product> productList;
     List<contact_category.catrgory> contactslist;
@@ -56,7 +60,7 @@ public class main_fragment extends Fragment {
     RelativeLayout order;
     int x = 0;
     int y = 0;
-   ImageView notification;
+   ImageView notification,favourit;
     private SharedPreferences sharedpref;
     private SharedPreferences.Editor edt;
     Typeface myTypeface;
@@ -79,6 +83,17 @@ public class main_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),notifications.class));
+            }
+        });
+        favourit=view.findViewById(R.id.favourit);
+        favourit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Favourit_fragment nextFrag= new Favourit_fragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, nextFrag, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         moreCategory=view.findViewById(R.id.moreCategory);
@@ -151,6 +166,13 @@ public class main_fragment extends Fragment {
         layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerviewFashion.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
         recyclerviewFashion.setHasFixedSize(true);
+        recyclerviewFavourit = (RecyclerView) view.findViewById(R.id.recyclerviewfavourit);
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(
+                        2, //The number of Columns in the grid
+                        LinearLayoutManager.VERTICAL);
+        recyclerviewFavourit.setLayoutManager(staggeredGridLayoutManager);
+        recyclerviewFavourit.setHasFixedSize(true);
         fetchInfo_categorys();
         fetchInfo_annonce();
         return view;
@@ -204,7 +226,7 @@ public class main_fragment extends Fragment {
     public void fetchInfo_products() {
         progressBar.setVisibility(View.VISIBLE);
         apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
-        Call<contact_products> call = apiinterface.getcontacts_products(sharedpref.getString("lang","ar"));
+        Call<contact_products> call = apiinterface.getcontacts_products_top(sharedpref.getString("lang","ar"));
         call.enqueue(new Callback<contact_products>() {
             @Override
             public void onResponse(Call<contact_products> call, Response<contact_products> response) {
@@ -215,7 +237,56 @@ public class main_fragment extends Fragment {
                     if (productList.size()!=0||!(productList.isEmpty())) {
                         recyclerAdapter_first_products = new RecyclerAdapter_first_products(getActivity(), productList);
                         recyclerviewFlash.setAdapter(recyclerAdapter_first_products);
+                    }
+                    fetchInfo_products_rated();
+                } catch (Exception e) {
+                }
+            }
+            @Override
+            public void onFailure(Call<contact_products> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+    public void fetchInfo_products_rated() {
+        apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
+        Call<contact_products> call = apiinterface.getcontacts_products_rated(sharedpref.getString("lang","ar"));
+        call.enqueue(new Callback<contact_products>() {
+            @Override
+            public void onResponse(Call<contact_products> call, Response<contact_products> response) {
+                contact_products=response.body();
+                try {
+                    productList=contact_products.getPayload();
+                    if (productList.size()!=0||!(productList.isEmpty())) {
+                        recyclerAdapter_first_products = new RecyclerAdapter_first_products(getActivity(), productList);
                         recyclerviewFashion.setAdapter(recyclerAdapter_first_products);
+
+                    }
+                    fetchInfo_products_favourit();
+                } catch (Exception e) {
+                }
+            }
+            @Override
+            public void onFailure(Call<contact_products> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+    public void fetchInfo_products_favourit() {
+        apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Accept","application/json");
+        headers.put("Authorization","Bearer "+ sharedpref.getString("token",""));
+        Call<contact_products> call = apiinterface.getcontacts_products_favorites(headers,sharedpref.getString("lang","ar"));
+        call.enqueue(new Callback<contact_products>() {
+            @Override
+            public void onResponse(Call<contact_products> call, Response<contact_products> response) {
+                contact_products=response.body();
+                try {
+                    productList=contact_products.getPayload();
+                    if (productList.size()!=0||!(productList.isEmpty())) {
+                        recyclerAdapter_first_products_inside = new RecyclerAdapter_first_products_inside(getActivity(), productList);
+                        recyclerviewFavourit.setAdapter(recyclerAdapter_first_products_inside);
 
                     }
                 } catch (Exception e) {

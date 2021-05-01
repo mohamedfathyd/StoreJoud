@@ -42,7 +42,7 @@ public class category_fragment extends Fragment {
     RelativeLayout order;
     int x = 0;
     int y = 0;
-    ImageView notification;
+    ImageView notification,favourit;
     private SharedPreferences sharedpref;
     private SharedPreferences.Editor edt;
     Typeface myTypeface;
@@ -67,6 +67,17 @@ public class category_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),notifications.class));
+            }
+        });
+        favourit=view.findViewById(R.id.favourit);
+        favourit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Favourit_fragment nextFrag= new Favourit_fragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, nextFrag, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         progressBar=view.findViewById(R.id.progressBar_subject);

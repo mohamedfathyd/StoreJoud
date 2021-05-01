@@ -60,8 +60,15 @@ public class RecyclerAdapter_first_annonce extends RecyclerView.Adapter<Recycler
         sharedpref = context.getSharedPreferences("Education", Context.MODE_PRIVATE);
         edt = sharedpref.edit();
         try {
-            holder.name.setText(contactslist.get(position).getName_by_lang());
+            sharedpref = context.getSharedPreferences("Education", Context.MODE_PRIVATE);
+            edt = sharedpref.edit();
+            if(sharedpref.getString("language","").trim().equals("ar")){
+                holder.name.setText(contactslist.get(position).getAr_name());
 
+            }else{
+                holder.name.setText(contactslist.get(position).getEn_name());
+
+            }
             Glide.with(context).load("https://storejoud.com/"+
                     contactslist.get(position).getIcon()).error(R.drawable.logocolor).into(holder.image);
         }

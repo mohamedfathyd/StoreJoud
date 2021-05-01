@@ -12,6 +12,8 @@
     <string name="admin_order">Admin order</string>
     <string name="warehouse_order">Warehouse order</string>
     <string name="markets">Markets</string>
+    <string name="add_review">Add review</string>
+    <string name="view_reviews">View Reviews Click here</string>
     <string name="track_ship">Track Shipment</string>
     <string name="status">Order status</string>
     <string name="items">Items</string>

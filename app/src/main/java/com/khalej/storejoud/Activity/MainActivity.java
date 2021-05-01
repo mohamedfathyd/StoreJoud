@@ -111,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
                 allgray();
                 offers_img.setBackgroundResource(R.drawable.ic_offer_color);
                 offers_text.setTextColor(getResources().getColor(R.color.orange));
+                Fragment fragment;
+                fragment = new Offers_fragment();
+                loadFragment(fragment);
+                x=1;
             }
         });
         account.setOnClickListener(new View.OnClickListener() {

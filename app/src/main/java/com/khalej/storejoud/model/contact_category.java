@@ -48,6 +48,10 @@ public class contact_category {
     public class catrgory{
        @SerializedName("name_by_lang")
         String name_by_lang;
+        @SerializedName("en_name")
+        String en_name;
+        @SerializedName("ar_name")
+        String ar_name;
        @SerializedName("id")
         String id;
        @SerializedName("icon")
@@ -75,6 +79,22 @@ public class contact_category {
 
         public void setIcon(String icon) {
             this.icon = icon;
+        }
+
+        public String getEn_name() {
+            return en_name;
+        }
+
+        public void setEn_name(String en_name) {
+            this.en_name = en_name;
+        }
+
+        public String getAr_name() {
+            return ar_name;
+        }
+
+        public void setAr_name(String ar_name) {
+            this.ar_name = ar_name;
         }
     }
 }

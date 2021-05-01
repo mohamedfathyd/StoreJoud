@@ -13,6 +13,8 @@
     <string name="admin_order">طلبات الأدمن</string>
     <string name="warehouse_order">طلبات المستودع</string>
     <string name="markets">المتاجر</string>
+    <string name="add_review">أضافة تعليق</string>
+    <string name="view_reviews">لعرض التعليقات أضغط هنا</string>
     <string name="status">حالة الطلب</string>
     <string name="items">عدد الطلبات</string>
     <string name="dateShipping">تاريخ الشحن</string>

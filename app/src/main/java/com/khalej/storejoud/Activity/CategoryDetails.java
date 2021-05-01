@@ -61,9 +61,10 @@ public class CategoryDetails extends AppCompatActivity {
     AppCompatButton appCompatButtonRegister;
     ProgressBar progressBar;
     private apiinterface_home apiinterface;
-    TextView productName,price,desc,alsoLike;
+    TextView productName,price,desc,alsoLike,viewR;
     Intent intent;
     RatingBar ratingBar;
+    ImageView favourit_icon;
     ProgressDialog progressDialog;
     String id;
     @Override
@@ -78,10 +79,12 @@ public class CategoryDetails extends AppCompatActivity {
         appCompatButtonRegister=findViewById(R.id.appCompatButtonRegister);
         back=findViewById(R.id.back);
         productName=findViewById(R.id.productName);
+        favourit_icon=findViewById(R.id.favourit_icon);
         ratingBar=findViewById(R.id.rate);
         price=findViewById(R.id.price);
         alsoLike=findViewById(R.id.alsoLike);
         desc=findViewById(R.id.desc);
+        viewR=findViewById(R.id.viewR);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +114,35 @@ public class CategoryDetails extends AppCompatActivity {
         appCompatButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fetchAddToCard();
+                if(sharedpref.getString("remember","").equals("yes")){
+                    fetchAddToCard();}
+                else{
+                    Toast.makeText(CategoryDetails.this,"قم بتسجل الدخول أولاَ" ,Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        favourit_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sharedpref.getString("remember","").equals("yes")){
+                    fetchAddToFavourit();}
+                else{
+                    Toast.makeText(CategoryDetails.this,"قم بتسجل الدخول أولاَ" ,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        viewR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sharedpref.getString("remember","").equals("yes")){
+                    Intent i =new Intent(CategoryDetails.this,reviews.class);
+                    i.putExtra("id",id);
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(CategoryDetails.this,"قم بتسجل الدخول أولاَ" ,Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -160,7 +191,10 @@ public class CategoryDetails extends AppCompatActivity {
                     else{alsoLike.setVisibility(View.GONE);
                     recyclerViewProduct.setVisibility(View.GONE);}
                     id=product.getId();
-                    //ratingBar.setRating(Float.parseFloat(product.getAverage_rate()));
+                    ratingBar.setRating(Float.parseFloat(product.getAverage_rate()));
+                    if(Float.parseFloat(product.getAverage_rate())==0){
+                        ratingBar.setVisibility(View.GONE);
+                    }
                 } catch (Exception e) {
                     progressBar.setVisibility(View.GONE);
                 }
@@ -202,13 +236,45 @@ public class CategoryDetails extends AppCompatActivity {
                     catch (Exception e){
 
                         progressDialog.dismiss();
-                        Toast.makeText(CategoryDetails.this,"هناك خطأ في أضافة هذا المنتج الى سلة المشتريات",Toast.LENGTH_LONG).show();
+                        Toast.makeText(CategoryDetails.this,"هذا المنتج مضاف الى السلة من قبل",Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
-                    Toast.makeText(CategoryDetails.this,"هناك خطأ في أضافة هذا المنتج الى سلة المشتريات",Toast.LENGTH_LONG).show();
+                    Toast.makeText(CategoryDetails.this,"هذا المنتج مضاف الى السلة من قبل",Toast.LENGTH_LONG).show();
 
                 }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                progressDialog.dismiss();
+            }
+        });
+    }
+    public void fetchAddToFavourit(){
+        apiinterface= Apiclient_home.getapiClient().create(apiinterface_home.class);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Accept","application/json");
+        headers.put("Authorization","Bearer "+ sharedpref.getString("token",""));
+
+        Call<ResponseBody> call= apiinterface.getcontacts_markasFavourit(headers,id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+
+
+                    try { favourit_icon.setBackgroundResource(R.drawable.ic_love_color);
+                     }
+                    catch (Exception e){
+
+                       //Toast.makeText(CategoryDetails.this,"هذا المنتج مضاف الى السلة من قبل",Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                   // Toast.makeText(CategoryDetails.this,"هذا المنتج مضاف الى السلة من قبل",Toast.LENGTH_LONG).show();
+                 }
             }
 
             @Override
