@@ -210,6 +210,7 @@ public class Login extends AppCompatActivity {
                         edt.putString("name",contactList.getPayload().getUser_info().getFull_name());
                         edt.putString("phone",contactList.getPayload().getUser_info().getPhone());
                         edt.putString("address",contactList.getPayload().getUser_info().getEmail());
+                        edt.putString("imageProfile",contactList.getPayload().getUser_info().getLogo_url());
                         edt.putString("token",contactList.getPayload().getToken());
                         edt.putString("type",contactList.getPayload().getUser_info().getType());
                         edt.putString("remember","yes");

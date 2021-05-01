@@ -49,6 +49,7 @@ public class account_fragment extends Fragment {
                 edt.putString("address","");
                 edt.putString("password","");
                 edt.putString("createdAt","");
+                edt.putString("imageProfile","");
                 edt.putInt("type",0);
                 edt.putFloat("wallet",0);
                 edt.putString("token","");

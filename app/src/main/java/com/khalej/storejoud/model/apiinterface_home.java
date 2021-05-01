@@ -63,8 +63,21 @@ public interface apiinterface_home {
     @GET("api/products/top-selling")
     Call<contact_products> getcontacts_products_top(@Query("lang") String lang);
 
+
+
     @GET("api/products/top-rated")
     Call<contact_products> getcontacts_products_rated(@Query("lang") String lang);
+
+    @GET("api/orders/notifications")
+    Call<contact_notifications> getcontacts_notifications(@HeaderMap Map<String, String> headers);
+
+    @GET("api/customer/profile/orders/active")
+    Call<contact_myOrders> getcontacts_myOrders(@HeaderMap Map<String, String> headers);
+
+
+    @Multipart
+    @POST("api/profile/update/logo")
+    Call<contact_profile>getcontact_updateImage(@Part MultipartBody.Part image,@HeaderMap Map<String, String> headers);
 
     @GET("api/products/favorites")
     Call<contact_products> getcontacts_products_favorites(@HeaderMap Map<String, String> headers,@Query("lang") String lang);
@@ -152,6 +165,18 @@ public interface apiinterface_home {
                                                           @Field("password") String password,
                                                           @Field("password_confirmation") String password_confirmation);
 
+    @FormUrlEncoded
+    @PATCH("api/cart/{product_id}/update")
+    Call <ResponseBody> updatecart(@HeaderMap Map<String, String> headers,
+                                                          @Path("product_id") String product_id,
+                                                          @Field("update_quantity") String update_quantity);
+
+    @FormUrlEncoded
+    @POST("api/products/order")
+    Call <ResponseBody> addOrder(@HeaderMap Map<String, String> headers,
+                                   @Field("address_id") String address_id,@Field("promo_code") String promo_code,
+                                   @Field("payment_method") String payment_method);
+
 
     @FormUrlEncoded
     @POST("api/products/{product_id}/cart")
@@ -161,6 +186,9 @@ public interface apiinterface_home {
 
     @DELETE("api/user/addresses/destroy/{address_id}")
     Call<ResponseBody> delete_address(@HeaderMap Map<String, String> headers, @Path("address_id") String address_id);
+
+    @DELETE("api/cart/destroy/{product_id}")
+    Call<ResponseBody> delete_cart(@HeaderMap Map<String, String> headers, @Path("product_id") String product_id);
 
     @FormUrlEncoded
     @POST("api/user/addresses")

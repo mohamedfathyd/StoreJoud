@@ -112,7 +112,7 @@
                 >
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:background="@drawable/ic_minus"
                     android:layout_height="15dp"
                     android:layout_gravity="center"
@@ -129,13 +129,13 @@
                     android:text="1"
                     android:gravity="center_horizontal"
                     android:textSize="13dp"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:textColor="#1D509E"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
 
                     android:background="@drawable/ic_plus"
                     android:layout_height="15dp"

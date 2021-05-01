@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_annonce;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_products;
@@ -34,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class category_fragment extends Fragment {
+public class category_fragment extends Fragment implements SearchView.OnQueryTextListener {
     private apiinterface_home apiinterface;
     private RecyclerView recyclerviewCategory;
     private RecyclerView.LayoutManager layoutManager;
@@ -50,7 +51,7 @@ public class category_fragment extends Fragment {
     private RecyclerAdapter_first_annonce recyclerAdapter_first_annonce;
     List<contact_category.catrgory> contactslist;
     contact_category contact_category;
-    EditText search_text;
+    SearchView search_text;
     ImageView search;
     @SuppressLint("WrongConstant")
     @Override
@@ -66,7 +67,7 @@ public class category_fragment extends Fragment {
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),notifications.class));
+                startActivity(new Intent(getContext(),offer_notification.class));
             }
         });
         favourit=view.findViewById(R.id.favourit);
@@ -89,21 +90,8 @@ public class category_fragment extends Fragment {
         recyclerviewCategory.setLayoutManager(staggeredGridLayoutManager);
         recyclerviewCategory.setHasFixedSize(true);
         fetchInfo_categorys();
-        search=view.findViewById(R.id.search);
         search_text=view.findViewById(R.id.search_text);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Search_fragment nextFrag= new Search_fragment();
-                Bundle bundle=new Bundle();
-                bundle.putString("searchText",search_text.getText().toString());
-                nextFrag.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, nextFrag, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        search_text.setOnQueryTextListener(this);
         return view;
     }
     public void fetchInfo_categorys() {
@@ -129,5 +117,24 @@ public class category_fragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        String text = query;
+        Search_fragment nextFrag= new Search_fragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("searchText",text);
+        nextFrag.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_container, nextFrag, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        return false;
     }
 }

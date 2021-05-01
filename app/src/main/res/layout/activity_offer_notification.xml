@@ -34,7 +34,7 @@
             android:gravity="start"
             android:layout_weight="6"
             android:layout_marginStart="5dp"
-            android:text="@string/Offers"
+            android:text="@string/notification"
             android:fontFamily="@font/taj"
             android:layout_gravity="center"
             android:textColor="@color/blue"
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
-            android:id="@+id/recyclerviewfavourit"
+            android:id="@+id/recyclerviewCart"
             android:orientation="vertical"
             android:layout_gravity="center"
             app:reverseLayout="true"
@@ -73,4 +73,14 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar_subject"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:indeterminateDrawable="@drawable/progress"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:visibility="gone" />
 </RelativeLayout>

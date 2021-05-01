@@ -12,17 +12,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.khalej.storejoud.Activity.Favourit_fragment;
 import com.khalej.storejoud.Activity.Product_fragment;
+import com.khalej.storejoud.Activity.basket_fragment;
 import com.khalej.storejoud.R;
+import com.khalej.storejoud.model.Apiclient_home;
 import com.khalej.storejoud.model.apiinterface_home;
 import com.khalej.storejoud.model.contact_cart;
 import com.khalej.storejoud.model.contact_category;
 
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RecyclerAdapter_cart extends RecyclerView.Adapter<RecyclerAdapter_cart.MyViewHolder> {
@@ -35,10 +43,11 @@ public class RecyclerAdapter_cart extends RecyclerView.Adapter<RecyclerAdapter_c
     private SharedPreferences sharedpref;
     private SharedPreferences.Editor edt;
     String type;
-
-    public RecyclerAdapter_cart(Context context, List<contact_cart.cart> contactslist){
+    basket_fragment bask_fragment;
+    public RecyclerAdapter_cart(Context context, List<contact_cart.cart> contactslist,basket_fragment bask_fragment){
         this.contactslist=contactslist;
         this.context=context;
+        this.bask_fragment=bask_fragment;
       }
     @NonNull
     @Override
@@ -65,13 +74,21 @@ public class RecyclerAdapter_cart extends RecyclerView.Adapter<RecyclerAdapter_c
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+           if(contactslist.get(position).getQuantity()>1){
+               fetchUpdate(contactslist.get(position).getId(),"decrease_quantity");
+           }
             }
         });
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                fetchUpdate(contactslist.get(position).getId(),"increase_quantity");
+            }
+        });
+        holder.delete_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchRemove(contactslist.get(position).getId());
             }
         });
 
@@ -100,6 +117,50 @@ public class RecyclerAdapter_cart extends RecyclerView.Adapter<RecyclerAdapter_c
         }
     }
 
+    public void fetchUpdate(String id,String qunt){
+        progressDialog = ProgressDialog.show(context, "جاري تعديل كمية الطلب", "Please wait...", false, false);
+        progressDialog.show();
 
+        apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Accept","application/json");
+        headers.put("Authorization","Bearer "+ sharedpref.getString("token",""));
+        Call<ResponseBody> call = apiinterface.updatecart(headers,id,qunt);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                bask_fragment.fetchInfo_products();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    public void fetchRemove(String id){
+        progressDialog = ProgressDialog.show(context, "جاري مسح الطلب", "Please wait...", false, false);
+        progressDialog.show();
+
+        apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Accept","application/json");
+        headers.put("Authorization","Bearer "+ sharedpref.getString("token",""));
+        Call<ResponseBody> call = apiinterface.delete_cart(headers,id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                bask_fragment.fetchInfo_products();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+    }
 
 }

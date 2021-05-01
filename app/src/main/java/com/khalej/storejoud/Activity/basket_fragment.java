@@ -2,6 +2,7 @@ package com.khalej.storejoud.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.khalej.storejoud.Adapter.RecyclerAdapter_cart;
 import com.khalej.storejoud.Adapter.RecyclerAdapter_first_products_inside;
@@ -26,6 +28,7 @@ import com.khalej.storejoud.model.contact_copon;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +54,7 @@ public class basket_fragment extends Fragment {
     EditText copon;
     TextView total,ship,charge,finaltotal,cobounAdd;
     double discount;
+    AppCompatButton appCompatButton;
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,11 +87,29 @@ public class basket_fragment extends Fragment {
         recyclerviewCart.setLayoutManager(staggeredGridLayoutManager);
         recyclerviewCart.setHasFixedSize(true);
         fetchInfo_products();
+        appCompatButton=view.findViewById(R.id.appCompatButtonRegister);
+        appCompatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),addresses_order.class);
+                intent.putExtra("promoCode",copon.getText().toString());
+                startActivity(intent);
 
+            }
+        });
         return view;
     }
     public void fetchInfo_products() {
         progressBar.setVisibility(View.VISIBLE);
+        recyclerviewCart.setVisibility(View.VISIBLE);
+        recyclerviewCart.setAdapter(null);
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(
+                        1, //The number of Columns in the grid
+                        LinearLayoutManager.VERTICAL);
+
+        recyclerviewCart.setLayoutManager(staggeredGridLayoutManager);
+        recyclerviewCart.setHasFixedSize(true);
         apiinterface = Apiclient_home.getapiClient().create(apiinterface_home.class);
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("Accept","application/json");
@@ -101,9 +123,24 @@ public class basket_fragment extends Fragment {
                 try {
                     cartList=contact_cart.getPayload();
                     if (cartList.size()!=0||!(cartList.isEmpty())) {
-                        recyclerAdapter_cart = new RecyclerAdapter_cart(getActivity(), cartList);
+                        recyclerAdapter_cart = new RecyclerAdapter_cart(getActivity(), cartList,basket_fragment.this);
                         recyclerviewCart.setAdapter(recyclerAdapter_cart);
 
+                    }
+                    else{
+                        progressBar.setVisibility(View.GONE);
+                        cartList.clear();
+                        recyclerviewCart.removeAllViews();
+                        recyclerviewCart.removeAllViewsInLayout();
+                        recyclerviewCart.setVisibility(View.GONE);
+                    }
+                    double totall=0;
+                    for(int i=0;cartList.size()>0;i++){
+                        totall+=cartList.get(i).getTotal_price();
+                        total.setText(totall+"$");
+                        finaltotal.setText(totall+"$");
+                        ship.setText(0.0+"$");
+                        charge.setText(0.0+"$");
                     }
                 } catch (Exception e) {
                 }
@@ -128,7 +165,11 @@ public class basket_fragment extends Fragment {
                 contact_copon=response.body();
                 try {
                     discount=contact_copon.getPayload().getDiscount();
+                    double totall= (Double.parseDouble(finaltotal.getText().toString())*(discount/100));
+                    total.setText(totall+"$");
+                    finaltotal.setText(totall+"$");
                 } catch (Exception e) {
+                    Toast.makeText(getContext(),"كود غير صالح",Toast.LENGTH_LONG).show();
                 }
             }
             @Override
