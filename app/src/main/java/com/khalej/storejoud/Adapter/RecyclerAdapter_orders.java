@@ -2,8 +2,11 @@ package com.khalej.storejoud.Adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +15,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.khalej.storejoud.Activity.OrderDetails;
 import com.khalej.storejoud.R;
 import com.khalej.storejoud.model.apiinterface_home;
 import com.khalej.storejoud.model.contact_myOrders;
 import com.khalej.storejoud.model.contact_reviews;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -54,14 +60,20 @@ public class RecyclerAdapter_orders extends RecyclerView.Adapter<RecyclerAdapter
             holder.code.setText(contactslist.get(position).getInvoice_id()+"");
             holder.status.setText(contactslist.get(position).getOrder_status()+"");
             holder.date.setText(contactslist.get(position).getPayment_method());
-            holder.items.setText(contactslist.get(position).getPromo_code());
+            holder.items.setText(contactslist.get(position).getProducts().size()+"");
             holder.price.setText(contactslist.get(position).getTotal()+"$");
-
-
-
         }
         catch (Exception e){}
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent i=new Intent(context, OrderDetails.class);
+//                Bundle bundle=new Bundle();
+//                bundle.putParcelableArrayList("product", (ArrayList<? extends Parcelable>) new ArrayList<>(contactslist.get(position).getProducts()));
+//                i.putExtras(bundle);
+//                context.startActivity(i);
+            }
+        });
 
     }
     @Override

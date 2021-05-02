@@ -66,7 +66,8 @@ public class contact_myOrders {
 
         @SerializedName("invoice_id")
         String invoice_id;
-
+        @SerializedName("products")
+        List<products>products;
         public String getInvoice_id() {
             return invoice_id;
         }
@@ -125,6 +126,80 @@ public class contact_myOrders {
 
         public void setPromo_code(String promo_code) {
             this.promo_code = promo_code;
+        }
+
+        public List<contact_myOrders.products> getProducts() {
+            return products;
+        }
+
+        public void setProducts(List<contact_myOrders.products> products) {
+            this.products = products;
+        }
+    }
+
+    public class products{
+        @SerializedName("final_price")
+        double final_price;
+        @SerializedName("quantity")
+        int quantity;
+        @SerializedName("product")
+        product product;
+
+        public double getFinal_price() {
+            return final_price;
+        }
+
+        public void setFinal_price(double final_price) {
+            this.final_price = final_price;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public contact_myOrders.product getProduct() {
+            return product;
+        }
+
+        public void setProduct(contact_myOrders.product product) {
+            this.product = product;
+        }
+    }
+
+    public class product{
+        @SerializedName("en_name")
+        String en_name;
+        @SerializedName("ar_name")
+        String ar_name;
+        @SerializedName("media_links")
+        List<String>media_links;
+
+        public String getEn_name() {
+            return en_name;
+        }
+
+        public void setEn_name(String en_name) {
+            this.en_name = en_name;
+        }
+
+        public String getAr_name() {
+            return ar_name;
+        }
+
+        public void setAr_name(String ar_name) {
+            this.ar_name = ar_name;
+        }
+
+        public List<String> getMedia_links() {
+            return media_links;
+        }
+
+        public void setMedia_links(List<String> media_links) {
+            this.media_links = media_links;
         }
     }
 }
