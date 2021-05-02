@@ -48,7 +48,7 @@ Intent i;
         cash=findViewById(R.id.cash);
         credit=findViewById(R.id.credit);
         i=getIntent();
-        address=i.getStringExtra("address");
+        address=i.getStringExtra("address_id");
         promoCode=i.getStringExtra("promoCode");
         back.setOnClickListener(new View.OnClickListener() {
             @Override
