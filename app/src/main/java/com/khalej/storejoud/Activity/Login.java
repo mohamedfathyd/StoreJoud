@@ -176,7 +176,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(textInputEditTextemail.getText().toString().equals("")||textInputEditTextemail.getText().toString()==null){
-                   startActivity(new Intent(Login.this, MainActivity.class));
+                 //  startActivity(new Intent(Login.this, MainActivity.class));
                 }
                 else{
                    // startActivity(new Intent(Login.this, MainActivity.class));

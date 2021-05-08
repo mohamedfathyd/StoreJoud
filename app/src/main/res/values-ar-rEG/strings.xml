@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">متجر جود</string>
+    <string name="app_name">ستور جود</string>
     <string name="hint_name">الأسم</string>
     <string name="Region">المنطقة</string>
     <string name="more">المزيد</string>
@@ -138,7 +138,7 @@
     <string name="phone">رقم الجوال</string>
     <string name="ask">هل انت متأكد انك تريد تأكيد هذا الطلب وارساله؟</string>
     <string name="load">جاري تسجيل طلبك</string>
-    <string name="WelcomJoud">مرحباً بك في متجر جود</string>
+    <string name="WelcomJoud">مرحباً بك في ستور جود</string>
     <string name="details">عليك تحويل المبلغ على الحساب السابق او الدفع عند الاستلام</string>
     <string name="mobile">... وارسال ايصال التحويل الى الواتس آب هذا :  971555733305   لأتمام عملية الشراء</string>
     <string name="listorders">قائمة طلباتك المحدده</string>
@@ -199,7 +199,7 @@
     <string name="Rreviews">أكتب مراجعة</string>
     <string name="Importcharges">رسوم</string>
     <string name="backhome">الرجوع للصفحة الرئيسية</string>
-    <string name="notfoundMssage">شكرا للتسوق باستخدام متجر جود</string>
+    <string name="notfoundMssage">شكرا للتسوق باستخدام ستور جود</string>
     <string name="notfound">المنتج غير متواجد</string>
     <string name="recommendthat">نوصي الأفضل لك</string>
     <string name="seeMore">عرض المزيد</string>

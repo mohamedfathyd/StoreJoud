@@ -56,6 +56,8 @@ public class contact_reviews {
         double rate;
         @SerializedName("created_at")
         String created_at;
+        @SerializedName("customer")
+        customer customer;
 
         public String getCreated_at() {
             return created_at;
@@ -95,6 +97,26 @@ public class contact_reviews {
 
         public void setRate(double rate) {
             this.rate = rate;
+        }
+
+        public contact_reviews.customer getCustomer() {
+            return customer;
+        }
+
+        public void setCustomer(contact_reviews.customer customer) {
+            this.customer = customer;
+        }
+    }
+    public class customer{
+        @SerializedName("logo_url")
+        String logo_url;
+
+        public String getLogo_url() {
+            return logo_url;
+        }
+
+        public void setLogo_url(String logo_url) {
+            this.logo_url = logo_url;
         }
     }
 }

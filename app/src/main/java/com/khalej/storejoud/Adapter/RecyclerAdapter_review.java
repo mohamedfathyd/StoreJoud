@@ -55,7 +55,8 @@ public class RecyclerAdapter_review extends RecyclerView.Adapter<RecyclerAdapter
             holder.review.setText(contactslist.get(position).getReview()+"");
             holder.date.setText(contactslist.get(position).getCreated_at());
             holder.rate.setRating((float) contactslist.get(position).getRate());
-            Glide.with(context).load("https://storejoud.com/").error(R.drawable.logocolor).into(holder.image);
+            Glide.with(context).load("https://storejoud.com/"+
+                    contactslist.get(position).getCustomer().getLogo_url()).error(R.drawable.logocolor).into(holder.image);
 
 
         }
